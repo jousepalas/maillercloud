@@ -1,0 +1,26 @@
+{
+	"name": "@bikelabyrinth/mailler",
+	"version": "1.0.0",
+	"description": "mail server, trigger URL: https://europe-west1-mailerserver-386112.cloudfunctions.net/subscriptionRenewalEmailer",
+	"main": "index.js",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/Bikelabyrinth/mailserver"
+	},
+	"author": "JousePalas",
+	"license": "ISC",
+	"bugs": {
+		"url": "git+https://github.com/Bikelabyrinth/mailserver"
+	},
+	"homepage": "https://github.com/jousepalas",
+	"dependencies": {
+		"body-parser": "^1.20.1",
+		"cors": "^2.8.5",
+		"dotenv": "^16.0.3",
+		"@google-cloud/tasks": "^3.1.2",
+		"md5": "^2.3.0",
+		"mysql": "^2.18.1",
+		"mysql2": "^2.3.3",
+		"nodemailer": "^6.8.0"
+	}
+}
