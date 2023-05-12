@@ -1,7 +1,6 @@
 const { Op } = require('sequelize');
 const { fl_software_abo } = require('../models');
 const models = require('../models');
-const config = require('../config/config');
 
 const getAllSoftwareAbo = async () => {
 	try {
