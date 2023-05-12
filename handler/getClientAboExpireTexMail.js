@@ -76,72 +76,72 @@ module.exports = async () => {
 	]);
 
 	// console.log("All ABO!!!   :  ", allAbo)
-	if (allAbo) {
-		allAbo.map((aboExp) => {
-			const validData =
-				aboExp &&
-				aboExp.fl_software_abo &&
-				aboExp.fl_software_abo.fl_bestelregel_levering &&
-				aboExp.fl_software_abo.fl_bestelregel_levering.fl_klanten != null;
+	// if (allAbo) {
+	// 	allAbo.map((aboExp) => {
+	// 		const validData =
+	// 			aboExp &&
+	// 			aboExp.fl_software_abo &&
+	// 			aboExp.fl_software_abo.fl_bestelregel_levering &&
+	// 			aboExp.fl_software_abo.fl_bestelregel_levering.fl_klanten != null;
 
-			if (validData) {
-				const email =
-					aboExp.fl_software_abo.fl_bestelregel_levering.fl_klanten
-						.algemeen_e_mail ||
-					aboExp.fl_software_abo.fl_bestelregel_levering.fl_klanten
-						.contactpersoon_2_mail ||
-					'info@bikelabyrinth.com';
-				const klant_id =
-					aboExp.fl_software_abo.fl_bestelregel_levering.fl_klanten.id;
-				const { auth, auth_original, generatedLink } = generateSubscriptionLink(
-					klant_id,
-					aboExp.abo_id
-				);
+	// 		if (validData) {
+	// 			const email =
+	// 				aboExp.fl_software_abo.fl_bestelregel_levering.fl_klanten
+	// 					.algemeen_e_mail ||
+	// 				aboExp.fl_software_abo.fl_bestelregel_levering.fl_klanten
+	// 					.contactpersoon_2_mail ||
+	// 				'info@bikelabyrinth.com';
+	// 			const klant_id =
+	// 				aboExp.fl_software_abo.fl_bestelregel_levering.fl_klanten.id;
+	// 			const { auth, auth_original, generatedLink } = generateSubscriptionLink(
+	// 				klant_id,
+	// 				aboExp.abo_id
+	// 			);
 
-				objFlSoftwareAboAutoMail[aboExp.abo_id] = {
-					date: today,
-					date_mail_2: today,
-					mail_2: 'email',
-					e_mail: email || '',
-					abo_id: aboExp.abo_id,
-					klant_id,
-					auth,
-					auth_original,
-					bestelling_id: aboExp.fl_software_abo.bestelling_id,
-					bestelling_date: today,
-					serienummer: aboExp.serienummer_id,
-					abo_years: aboExp.fl_software_abo.abo_years || 2023,
-					abo_end_old: aboExp.abo_date_end,
-					abo_end_new: aboExp.abo_date_end,
-				};
+	// 			objFlSoftwareAboAutoMail[aboExp.abo_id] = {
+	// 				date: today,
+	// 				date_mail_2: today,
+	// 				mail_2: 'email',
+	// 				e_mail: email || '',
+	// 				abo_id: aboExp.abo_id,
+	// 				klant_id,
+	// 				auth,
+	// 				auth_original,
+	// 				bestelling_id: aboExp.fl_software_abo.bestelling_id,
+	// 				bestelling_date: today,
+	// 				serienummer: aboExp.serienummer_id,
+	// 				abo_years: aboExp.fl_software_abo.abo_years || 2023,
+	// 				abo_end_old: aboExp.abo_date_end,
+	// 				abo_end_new: aboExp.abo_date_end,
+	// 			};
 
-				const content = prepareContent(aboExp, contentText.content);
-				const subject = contentText.onderwerp;
-				const token = generateRandomString(32);
+	// 			const content = prepareContent(aboExp, contentText.content);
+	// 			const subject = contentText.onderwerp;
+	// 			const token = generateRandomString(32);
 
-				const report = emailCreated(aboExp);
-				objFinal[aboExp.abo_id] = {
-					userId: klant_id,
-					aboId: aboExp.abo_id,
-					email,
-					subject,
-					content,
-					token,
-					schedule_type: today,
-					report,
-					status: 'created',
-					generatedLink,
-				};
-			}
-		});
+	// 			const report = emailCreated(aboExp);
+	// 			objFinal[aboExp.abo_id] = {
+	// 				userId: klant_id,
+	// 				aboId: aboExp.abo_id,
+	// 				email,
+	// 				subject,
+	// 				content,
+	// 				token,
+	// 				schedule_type: today,
+	// 				report,
+	// 				status: 'created',
+	// 				generatedLink,
+	// 			};
+	// 		}
+	// 	});
 
-		Object.keys(objFinal).forEach((obj) => {
-			return Promise.all([
-				createMail(objFinal[obj]),
-				createFlSoftwareAboAutoMail(objFlSoftwareAboAutoMail[obj]),
-			]);
-		});
-	} // end if
+	// 	Object.keys(objFinal).forEach((obj) => {
+	// 		return Promise.all([
+	// 			createMail(objFinal[obj]),
+	// 			createFlSoftwareAboAutoMail(objFlSoftwareAboAutoMail[obj]),
+	// 		]);
+	// 	});
+	// } // end if
 
 	// return objFinal;
 	return { allAbo, contentText };
