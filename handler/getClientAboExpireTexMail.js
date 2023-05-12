@@ -70,11 +70,13 @@ const generateSubscriptionLink = (klant_id, abo_id) => {
 module.exports = async () => {
 	let objFinal = {};
 	let objFlSoftwareAboAutoMail = {};
-	const [contentText, allAbo] = await Promise.all([
+	const [contentText, allAboResult] = await Promise.all([
 		getVerlengTextById,
 		getThreeDaysAboExpWithAssociation,
 	]);
 
+	const allAbo = await allAboResult;
+	console.log('🚀 ~ ~ allAbo:', allAbo);
 	// console.log("All ABO!!!   :  ", allAbo)
 	// if (allAbo) {
 	// 	allAbo.map((aboExp) => {
