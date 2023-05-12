@@ -1,4 +1,9 @@
-const createEmailDataFunc = require('./handler/getClientAboExpireTexMail');
+const config = require('./config/config');
+const connection = require('./config/db')(config.db);
+
+const { createConnection } = require('./config/db');
+
+const { createEmailDataFunc } = require('./handler/getClientAboExpireTexMail');
 const { CloudTasksClient } = require('@google-cloud/tasks');
 const client = new CloudTasksClient();
 
@@ -45,17 +50,18 @@ async function createTask(createEmailData) {
 // }
 
 // listQueues().catch(console.error);
-
 exports.enqueueEmail = async (req, res) => {
 	try {
 		const createEmailData = await createEmailDataFunc();
-		console.log(
-			'🚀 ~ file: index.js:52 ~ exports.enqueueEmail= ~ createEmailData:',
-			createEmailData
-		);
+		// console.log(
+		// 	'🚀 ~ file: index.js:52 ~ exports.enqueueEmail= ~ createEmailData:',
+		// 	createEmailData
+		// );
 		// await createTask(createEmailData);
 		// await listQueues();
-		return res.status(200).json({ success: true, data: createEmailData });
+		return res
+			.status(200)
+			.json({ success: true, createEmailData: createEmailData });
 	} catch (error) {
 		console.log(
 			'🚀 ~ file: index.js:18 ~ exports.enqueueEmail= ~ error:',

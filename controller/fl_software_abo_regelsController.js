@@ -1,6 +1,7 @@
 const { Op } = require('sequelize');
 const { fl_software_abo_regels } = require('../models');
 const models = require('../models');
+const config = require('../config/config');
 
 const getAllAbo = async () => {
 	try {
@@ -63,6 +64,10 @@ const getThreeDaysAboExpWithAssociation = async () => {
 			},
 			include: [
 				{
+					model: models.fl_software_serienummers,
+					as: 'fl_software_serienummers',
+				},
+				{
 					model: models.fl_software_abo,
 					as: 'fl_software_abo',
 					include: [
@@ -82,6 +87,12 @@ const getThreeDaysAboExpWithAssociation = async () => {
 				},
 			],
 		});
+
+		console.log(
+			'🚀 ~ file: fl_software_abo_regelsController.js:86 ~ getThreeDaysAboExpWithAssociation ~ getAllInfo:',
+			getAllInfo
+		);
+
 		return getAllInfo;
 	} catch (error) {
 		console.log(

@@ -7,9 +7,19 @@ const config = {
 	env: env,
 	port: port,
 	db: {
-		host: '34.76.14.238',
-		username: 'jousepalas',
-		password: 'Hugo2006',
+		//Google Cloud SQL
+		// host: '34.76.14.238',
+		// username: 'jousepalas',
+		// password: 'Hugo2006',
+		// database: 'fietslabyrinth',
+		// socketPath: `/cloudsql/mailerserver-386112:europe-west1:fietslabyrint`,
+		// port: 3306,
+		// dialect: 'mysql',
+
+		// Localhost
+		host: '127.0.0.1',
+		username: 'root',
+		password: 'root',
 		database: 'fietslabyrinth',
 		socketPath: `/cloudsql/mailerserver-386112:europe-west1:fietslabyrint`,
 		port: 3306,
