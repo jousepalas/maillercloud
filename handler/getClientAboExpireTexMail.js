@@ -74,10 +74,6 @@ module.exports = async () => {
 		getVerlengTextById,
 		getThreeDaysAboExpWithAssociation,
 	]);
-	console.log(
-		'🚀 ~ file: getClientAboExpireTexMail.js:74 ~ module.exports= ~ allAbo:',
-		allAbo
-	);
 
 	// console.log("All ABO!!!   :  ", allAbo)
 	// if (allAbo) {

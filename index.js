@@ -49,6 +49,10 @@ async function createTask(createEmailData) {
 exports.enqueueEmail = async (req, res) => {
 	try {
 		const createEmailData = await createEmailDataFunc();
+		console.log(
+			'🚀 ~ file: index.js:52 ~ exports.enqueueEmail= ~ createEmailData:',
+			createEmailData
+		);
 		// await createTask(createEmailData);
 		// await listQueues();
 		return res.status(200).json({ success: true, data: createEmailData });
